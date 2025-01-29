@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Product
+
+<h2>Edit Product</h2>
+
+<form action="@Url.Action("Edit", "Product")" method="post">
+    <input type="hidden" name="ProductId" value="@Model.ProductId" />
+    <div>
+        <label>Product Name:</label>
+        <input type="text" name="ProductName" value="@Model.ProductName" required />
+    </div>
+    <div>
+        <label>Category:</label>
+        <select name="CategoryId" required>
+            @foreach (var category in (List<Category>)ViewBag.Categories)
+            {
+                if (category.CategoryId == Model.CategoryId)
+                {
+                    <option value="@category.CategoryId" selected="selected">@category.CategoryName</option>
+                }
+                else
+                {
+                    <option value="@category.CategoryId">@category.CategoryName</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit">Update</button>
+</form>
+
+<a href="@Url.Action("Index", "Product")">Back to List</a>

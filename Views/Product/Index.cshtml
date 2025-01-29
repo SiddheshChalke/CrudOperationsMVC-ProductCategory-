@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@@model PaginatedList<Product>
+
+    <h2>Product List</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ProductId</th>
+                <th>ProductName</th>
+                <th>CategoryId</th>
+                <th>CategoryName</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.ProductId</td>
+                    <td>@product.ProductName</td>
+                    <td>@product.CategoryId</td>
+                    <td>@product.CategoryName</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Product", new { id = product.ProductId })">Edit</a> |
+                        <a href="@Url.Action("Delete", "Product", new { id = product.ProductId })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        @if (Model.HasPreviousPage)
+        {
+            <a href="@Url.Action("Index", new { pageIndex = Model.PageIndex - 1 })">Previous</a>
+        }
+
+        <span>Page @Model.PageIndex of @Model.TotalPages</span>
+
+        @if (Model.HasNextPage)
+        {
+            <a href="@Url.Action("Index", new { pageIndex = Model.PageIndex + 1 })">Next</a>
+        }
+    </div>
