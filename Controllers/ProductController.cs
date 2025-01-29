@@ -160,7 +160,7 @@ namespace CurdOperationProductsDemo.Controllers
 
 
         // Delete POST Action
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         public ActionResult DeleteConfirmed(int id)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
